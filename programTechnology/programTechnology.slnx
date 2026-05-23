@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/Application/" />
+  <Folder Name="/Domain/">
+    <Project Path="Domain.ValueObject/Domain.ValueObject.csproj" />
+  </Folder>
+  <Folder Name="/Infrastructure/" />
+  <Folder Name="/Presentation/" />
+</Solution>
