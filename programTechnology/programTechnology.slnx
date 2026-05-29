@@ -3,6 +3,12 @@
   <Folder Name="/Domain/">
     <Project Path="Domain.ValueObject/Domain.ValueObject.csproj" />
   </Folder>
+  <Folder Name="/Domain/Entities/">
+    <File Path="Client.cs" />
+  </Folder>
+  <Folder Name="/Domain/Enums/">
+    <File Path="BookingStatus.cs" />
+  </Folder>
   <Folder Name="/Infrastructure/" />
   <Folder Name="/Presentation/" />
 </Solution>
