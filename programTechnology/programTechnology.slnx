@@ -4,7 +4,11 @@
     <Project Path="Domain.ValueObject/Domain.ValueObject.csproj" />
   </Folder>
   <Folder Name="/Domain/Entities/">
+    <File Path="Booking.cs" />
     <File Path="Client.cs" />
+    <File Path="Organizer.cs" />
+    <File Path="Quest.cs" />
+    <File Path="Schedule.cs" />
   </Folder>
   <Folder Name="/Domain/Enums/">
     <File Path="BookingStatus.cs" />
