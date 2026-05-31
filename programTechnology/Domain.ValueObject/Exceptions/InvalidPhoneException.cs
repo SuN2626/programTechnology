@@ -1,9 +1,7 @@
-﻿namespace Domain.Exceptions;
+﻿namespace Domain.ValueObjects.Exceptions;
 
-public class InvalidPhoneException : Exception
+public class InvalidPhoneException(string value)
+    : Exception($"Phone '{value}' is invalid.")
 {
-    public InvalidPhoneException(string message)
-        : base(message)
-    {
-    }
+    public string Value => value;
 }

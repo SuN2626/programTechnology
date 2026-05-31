@@ -1,14 +1,15 @@
-﻿using Domain.ValueObject;
+﻿using Domain.ValueObjects;
 
 namespace Domain.Entities;
 
 public class Quest
 {
-    public Guid Id { get; private set; }
+    public Guid Id { get; }
 
-    public Guid OrganizerId { get; private set; }
+    public Guid OrganizerId { get; }
 
     public Title Title { get; private set; }
+    public string Type { get; private set; }
 
     public Description Description { get; private set; }
 
@@ -16,28 +17,55 @@ public class Quest
 
     public DurationMinutes DurationMinutes { get; private set; }
 
-    private Quest()
+    public DateTime CreatedAt { get; private set; }
+
+    protected Quest()
     {
     }
 
     public Quest(
-        Guid organizerId,
-        Title title,
-        Description description,
-        Money price,
-        DurationMinutes durationMinutes)
+    Guid organizerId,
+    Title title,
+    string type,
+    Description description,
+    Money price,
+    DurationMinutes durationMinutes)
     {
         Id = Guid.NewGuid();
 
         OrganizerId = organizerId;
         Title = title;
+        Type = type;
         Description = description;
         Price = price;
         DurationMinutes = durationMinutes;
+        CreatedAt = DateTime.UtcNow;
     }
 
-    public void ChangePrice(Money price)
+    public bool ChangePrice(Money price)
     {
+        if (Price == price)
+            return false;
+
         Price = price;
+        return true;
+    }
+
+    public bool ChangeTitle(Title title)
+    {
+        if (Title == title)
+            return false;
+
+        Title = title;
+        return true;
+    }
+
+    public bool ChangeDescription(Description description)
+    {
+        if (Description == description)
+            return false;
+
+        Description = description;
+        return true;
     }
 }

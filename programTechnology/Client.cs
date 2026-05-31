@@ -1,10 +1,10 @@
-﻿using Domain.ValueObject;
+﻿using Domain.ValueObjects;
 
 namespace Domain.Entities;
 
 public class Client
 {
-    public Guid Id { get; private set; }
+    public Guid Id { get; }
 
     public Username Username { get; private set; }
 
@@ -12,7 +12,7 @@ public class Client
 
     public Phone Phone { get; private set; }
 
-    private Client()
+    protected Client()
     {
     }
 
@@ -28,13 +28,21 @@ public class Client
         Phone = phone;
     }
 
-    public void ChangePhone(Phone phone)
+    public bool ChangeEmail(Email email)
     {
-        Phone = phone;
+        if (Email == email)
+            return false;
+
+        Email = email;
+        return true;
     }
 
-    public void ChangeEmail(Email email)
+    public bool ChangePhone(Phone phone)
     {
-        Email = email;
+        if (Phone == phone)
+            return false;
+
+        Phone = phone;
+        return true;
     }
 }

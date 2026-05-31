@@ -1,9 +1,7 @@
-﻿namespace Domain.Exceptions;
+﻿namespace Domain.ValueObjects.Exceptions;
 
-public class InvalidEmailException : Exception
+public class InvalidEmailException(string value)
+    : Exception($"Email '{value}' is invalid.")
 {
-    public InvalidEmailException(string message)
-        : base(message)
-    {
-    }
+    public string Value => value;
 }

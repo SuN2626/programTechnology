@@ -1,9 +1,7 @@
-﻿namespace Domain.Exceptions;
+﻿namespace Domain.ValueObjects.Exceptions;
 
-public class InvalidGuestsCountException : Exception
+public class InvalidGuestsCountException(int value)
+    : Exception($"Guests count '{value}' is invalid.")
 {
-    public InvalidGuestsCountException(string message)
-        : base(message)
-    {
-    }
+    public int Value => value;
 }

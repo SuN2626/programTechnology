@@ -1,70 +1,26 @@
-﻿using Domain.Exceptions;
+﻿using Domain.ValueObjects.Base;
+using Domain.ValueObjects.Validators;
 
-namespace Domain.ValueObject;
+namespace Domain.ValueObjects;
 
-public sealed class Money : IComparable<Money>
+public class Money(decimal value)
+    : ValueObject<decimal>(new MoneyValidator(), value)
 {
-    public decimal Value { get; }
-
-    private Money(decimal value)
-    {
-        Value = decimal.Round(value, 2);
-    }
-
-    public static Money Create(decimal value)
-    {
-        if (value < 0)
-        {
-            throw new InvalidMoneyException(
-                "Money cannot be negative");
-        }
-
-        if (decimal.Round(value, 2) != value)
-        {
-            throw new InvalidMoneyException(
-                "Only 2 decimal places allowed");
-        }
-
-        return new Money(value);
-    }
-
     public static Money operator +(Money a, Money b)
-    {
-        return Create(a.Value + b.Value);
-    }
+        => new(a.Value + b.Value);
 
     public static Money operator -(Money a, Money b)
-    {
-        return Create(a.Value - b.Value);
-    }
+        => new(a.Value - b.Value);
 
     public static bool operator >(Money a, Money b)
-    {
-        return a.Value > b.Value;
-    }
+        => a.Value > b.Value;
 
     public static bool operator <(Money a, Money b)
-    {
-        return a.Value < b.Value;
-    }
+        => a.Value < b.Value;
 
     public static bool operator >=(Money a, Money b)
-    {
-        return a.Value >= b.Value;
-    }
+        => a.Value >= b.Value;
 
     public static bool operator <=(Money a, Money b)
-    {
-        return a.Value <= b.Value;
-    }
-
-    public int CompareTo(Money? other)
-    {
-        return Value.CompareTo(other?.Value);
-    }
-
-    public override string ToString()
-    {
-        return Value.ToString("F2");
-    }
+        => a.Value <= b.Value;
 }

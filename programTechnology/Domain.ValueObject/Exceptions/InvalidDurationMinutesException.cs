@@ -1,10 +1,7 @@
-﻿namespace Domain.Exceptions;
+﻿namespace Domain.ValueObjects.Exceptions;
 
-public class InvalidDurationMinutesException : Exception
+public class InvalidDurationMinutesException(int value)
+    : Exception($"Duration '{value}' minutes is invalid.")
 {
-    public InvalidDurationMinutesException(
-        string message)
-        : base(message)
-    {
-    }
-}Ы
+    public int Value => value;
+}

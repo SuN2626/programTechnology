@@ -1,9 +1,7 @@
-﻿namespace Domain.Exceptions;
+﻿namespace Domain.ValueObjects.Exceptions;
 
-public class InvalidMoneyException : Exception
+public class InvalidMoneyException(decimal value)
+    : Exception($"Money value '{value}' is invalid.")
 {
-    public InvalidMoneyException(string message)
-        : base(message)
-    {
-    }
+    public decimal Value => value;
 }

@@ -1,15 +1,17 @@
 ﻿using Domain.Enums;
-using Domain.ValueObject;
+using Domain.ValueObjects;
 
 namespace Domain.Entities;
 
 public class Booking
 {
-    public Guid Id { get; private set; }
+    public Guid Id { get; }
 
-    public Guid ClientId { get; private set; }
+    public Guid ClientId { get; }
 
-    public Guid ScheduleId { get; private set; }
+    public Guid ScheduleId { get; }
+
+    public DateTime BookingDate { get; private set; }
 
     public GuestsCount GuestsCount { get; private set; }
 
@@ -17,7 +19,7 @@ public class Booking
 
     public BookingStatus Status { get; private set; }
 
-    private Booking()
+    protected Booking()
     {
     }
 
@@ -31,6 +33,7 @@ public class Booking
 
         ClientId = clientId;
         ScheduleId = scheduleId;
+        BookingDate = DateTime.UtcNow;
         GuestsCount = guestsCount;
         TotalPrice = totalPrice;
 

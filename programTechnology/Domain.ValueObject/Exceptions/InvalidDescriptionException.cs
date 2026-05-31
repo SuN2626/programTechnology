@@ -1,9 +1,7 @@
-﻿namespace Domain.Exceptions;
+﻿namespace Domain.ValueObjects.Exceptions;
 
-public class InvalidDescriptionException : Exception
+public class InvalidDescriptionException(string value)
+    : Exception($"Description is invalid.")
 {
-    public InvalidDescriptionException(string message)
-        : base(message)
-    {
-    }
+    public string Value => value;
 }

@@ -1,9 +1,7 @@
-﻿namespace Domain.Exceptions;
+﻿namespace Domain.ValueObjects.Exceptions;
 
-public class InvalidUsernameException : Exception
+public class InvalidUsernameException(string value)
+    : Exception($"Username '{value}' is invalid.")
 {
-    public InvalidUsernameException(string message)
-        : base(message)
-    {
-    }
+    public string Value => value;
 }

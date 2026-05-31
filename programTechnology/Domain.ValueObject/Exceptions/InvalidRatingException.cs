@@ -1,9 +1,7 @@
-﻿namespace Domain.Exceptions;
+﻿namespace Domain.ValueObjects.Exceptions;
 
-public class InvalidRatingException : Exception
+public class InvalidRatingException(decimal value)
+    : Exception($"Rating '{value}' must be between 0 and 5.")
 {
-    public InvalidRatingException(string message)
-        : base(message)
-    {
-    }
+    public decimal Value => value;
 }

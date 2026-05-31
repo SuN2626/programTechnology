@@ -1,77 +1,26 @@
-﻿using Domain.Exceptions;
+﻿using Domain.ValueObjects.Base;
+using Domain.ValueObjects.Validators;
 
-namespace Domain.ValueObject;
+namespace Domain.ValueObjects;
 
-public sealed class DurationMinutes
+public class DurationMinutes(int value)
+    : ValueObject<int>(new DurationMinutesValidator(), value)
 {
-    public int Value { get; }
+    public static DurationMinutes operator +(DurationMinutes a, DurationMinutes b)
+        => new(a.Value + b.Value);
 
-    private DurationMinutes(int value)
-    {
-        Value = value;
-    }
+    public static DurationMinutes operator -(DurationMinutes a, DurationMinutes b)
+        => new(a.Value - b.Value);
 
-    public static DurationMinutes Create(int value)
-    {
-        if (value <= 0)
-        {
-            throw new InvalidDurationMinutesException(
-                "Duration must be positive");
-        }
+    public static bool operator >(DurationMinutes a, DurationMinutes b)
+        => a.Value > b.Value;
 
-        if (value > 300)
-        {
-            throw new InvalidDurationMinutesException(
-                "Duration too long");
-        }
+    public static bool operator <(DurationMinutes a, DurationMinutes b)
+        => a.Value < b.Value;
 
-        return new DurationMinutes(value);
-    }
+    public static bool operator >=(DurationMinutes a, DurationMinutes b)
+        => a.Value >= b.Value;
 
-    public static DurationMinutes operator +(
-        DurationMinutes a,
-        DurationMinutes b)
-    {
-        return Create(a.Value + b.Value);
-    }
-
-    public static DurationMinutes operator -(
-        DurationMinutes a,
-        DurationMinutes b)
-    {
-        return Create(a.Value - b.Value);
-    }
-
-    public static bool operator >(
-        DurationMinutes a,
-        DurationMinutes b)
-    {
-        return a.Value > b.Value;
-    }
-
-    public static bool operator <(
-        DurationMinutes a,
-        DurationMinutes b)
-    {
-        return a.Value < b.Value;
-    }
-
-    public static bool operator >=(
-        DurationMinutes a,
-        DurationMinutes b)
-    {
-        return a.Value >= b.Value;
-    }
-
-    public static bool operator <=(
-        DurationMinutes a,
-        DurationMinutes b)
-    {
-        return a.Value <= b.Value;
-    }
-
-    public override string ToString()
-    {
-        return Value.ToString();
-    }
+    public static bool operator <=(DurationMinutes a, DurationMinutes b)
+        => a.Value <= b.Value;
 }

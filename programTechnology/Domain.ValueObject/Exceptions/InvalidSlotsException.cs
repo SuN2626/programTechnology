@@ -1,9 +1,7 @@
-﻿namespace Domain.Exceptions;
+﻿namespace Domain.ValueObjects.Exceptions;
 
-public class InvalidSlotsException : Exception
+public class InvalidSlotsException(int value)
+    : Exception($"Slots value '{value}' is invalid.")
 {
-    public InvalidSlotsException(string message)
-        : base(message)
-    {
-    }
+    public int Value => value;
 }

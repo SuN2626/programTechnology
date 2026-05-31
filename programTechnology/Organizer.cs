@@ -1,10 +1,10 @@
-﻿using Domain.ValueObject;
+﻿using Domain.ValueObjects;
 
 namespace Domain.Entities;
 
 public class Organizer
 {
-    public Guid Id { get; private set; }
+    public Guid Id { get; }
 
     public CompanyName CompanyName { get; private set; }
 
@@ -16,7 +16,7 @@ public class Organizer
 
     public Rating Rating { get; private set; }
 
-    private Organizer()
+    protected Organizer()
     {
     }
 
@@ -36,8 +36,21 @@ public class Organizer
         Rating = rating;
     }
 
-    public void ChangeRating(Rating rating)
+    public bool ChangeRating(Rating rating)
     {
+        if (Rating == rating)
+            return false;
+
         Rating = rating;
+        return true;
+    }
+
+    public bool ChangeDescription(Description description)
+    {
+        if (Description == description)
+            return false;
+
+        Description = description;
+        return true;
     }
 }

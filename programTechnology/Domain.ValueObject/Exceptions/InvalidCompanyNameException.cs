@@ -1,9 +1,7 @@
-﻿namespace Domain.Exceptions;
+﻿namespace Domain.ValueObjects.Exceptions;
 
-public class InvalidCompanyNameException : Exception
+public class InvalidCompanyNameException(string value)
+    : Exception($"Company name '{value}' is invalid.")
 {
-    public InvalidCompanyNameException(string message)
-        : base(message)
-    {
-    }
+    public string Value => value;
 }

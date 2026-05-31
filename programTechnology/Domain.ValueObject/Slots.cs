@@ -1,65 +1,26 @@
-﻿using Domain.Exceptions;
+﻿using Domain.ValueObjects.Base;
+using Domain.ValueObjects.Validators;
 
-namespace Domain.ValueObject;
+namespace Domain.ValueObjects;
 
-public sealed class Slots
+public class Slots(int value)
+    : ValueObject<int>(new SlotsValidator(), value)
 {
-    public int Value { get; }
-
-    private Slots(int value)
-    {
-        Value = value;
-    }
-
-    public static Slots Create(int value)
-    {
-        if (value < 0)
-        {
-            throw new InvalidSlotsException(
-                "Slots cannot be negative");
-        }
-
-        if (value > 20)
-        {
-            throw new InvalidSlotsException(
-                "Maximum slots is 20");
-        }
-
-        return new Slots(value);
-    }
-
     public static Slots operator +(Slots a, Slots b)
-    {
-        return Create(a.Value + b.Value);
-    }
+        => new(a.Value + b.Value);
 
     public static Slots operator -(Slots a, Slots b)
-    {
-        return Create(a.Value - b.Value);
-    }
+        => new(a.Value - b.Value);
 
     public static bool operator >(Slots a, Slots b)
-    {
-        return a.Value > b.Value;
-    }
+        => a.Value > b.Value;
 
     public static bool operator <(Slots a, Slots b)
-    {
-        return a.Value < b.Value;
-    }
+        => a.Value < b.Value;
 
     public static bool operator >=(Slots a, Slots b)
-    {
-        return a.Value >= b.Value;
-    }
+        => a.Value >= b.Value;
 
     public static bool operator <=(Slots a, Slots b)
-    {
-        return a.Value <= b.Value;
-    }
-
-    public override string ToString()
-    {
-        return Value.ToString();
-    }
+        => a.Value <= b.Value;
 }

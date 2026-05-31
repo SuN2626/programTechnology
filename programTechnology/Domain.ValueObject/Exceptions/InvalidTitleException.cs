@@ -1,9 +1,7 @@
-﻿namespace Domain.Exceptions;
+﻿namespace Domain.ValueObjects.Exceptions;
 
-public class InvalidTitleException : Exception
+public class InvalidTitleException(string value)
+    : Exception($"Title '{value}' is invalid.")
 {
-    public InvalidTitleException(string message)
-        : base(message)
-    {
-    }
+    public string Value => value;
 }

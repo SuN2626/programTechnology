@@ -1,40 +1,44 @@
-﻿using Domain.ValueObject;
+﻿using Domain.ValueObjects;
 
 namespace Domain.Entities;
 
 public class Schedule
 {
-    public Guid Id { get; private set; }
+    public Guid Id { get; }
 
-    public Guid QuestId { get; private set; }
+    public Guid QuestId { get; }
 
-    public DateTime StartTime { get; private set; }
+    public DateTime StartTime { get; }
 
-    public Slots SlotsTotal { get; private set; }
+    public Slots SlotsTotal { get; }
 
     public Slots SlotsAvailable { get; private set; }
 
-    private Schedule()
+    protected Schedule()
     {
     }
 
     public Schedule(
         Guid questId,
         DateTime startTime,
-        Slots slotsTotal,
-        Slots slotsAvailable)
+        Slots slotsTotal)
     {
         Id = Guid.NewGuid();
 
         QuestId = questId;
         StartTime = startTime;
+
         SlotsTotal = slotsTotal;
-        SlotsAvailable = slotsAvailable;
+        SlotsAvailable = slotsTotal;
     }
 
-    public void ReserveSlot()
+    public bool ReserveSlot()
     {
-        SlotsAvailable =
-            SlotsAvailable - Slots.Create(1);
+        if (SlotsAvailable <= new Slots(0))
+            return false;
+
+        SlotsAvailable = SlotsAvailable - new Slots(1);
+
+        return true;
     }
 }
